@@ -37,3 +37,20 @@ void printlist(size_head*& list, int n) {
 		tmp = tmp->next;
 		cout << endl;
 	}
+}
+void step(size_head*& list, int n, int m, vector<int>& stepen) {
+	struct spis* tmp = list->head;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			stepen[i] += tmp->ver[i];
+			tmp = tmp->next;
+		}
+		tmp = list->head;
+	}
+	cout << "Степени" << endl;
+	for (int i = 0; i < n; i++) {
+		cout << stepen[i] << " ";
+	}
+	cout << endl;
+}
+
