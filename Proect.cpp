@@ -83,6 +83,51 @@ void sort(size_head*& list, int n, int m, vector<int>& stepen, vector<int>& ind)
 	}
 	cout << endl;
 }
+void del(size_head*& list, int num, spis*& pr, bool& fl) {
+	struct spis* temp = list->head;
+	int i = 0;
+	if ((temp != NULL) && (num < list->size)) {
+		while (temp && i < num) {
+			i++;
+			pr = temp;
+			temp = temp->next;
+		}
+		if (!temp) return;
+		if (list->head == temp) {
+			list->head = temp->next;
+			pr = pr->next;
+			fl = 1;
+		}
+		else {
+			if (pr && temp->next) pr->next = temp->next;
+			else if (!temp->next) pr->next = NULL;
+			pr = pr->next;
+			fl = 1;
+		}
+		list->size--;
+		free(temp);
+	}
+}
+void search(size_head*& list, int n, int m) {
+	printlist(list, n);
+	int count = 0;
+	bool fl;
+	struct spis* sp = list->head;
+	while (count < int(list->size)) {
+		fl = 0;
+		for (int j = 0; j < n; j++) {
+			if ((sp->ver[j] == 2) || (j == 0 && sp->ver[j] != 0)) {
+				del(list, count, sp, fl);
+				break;
+			}
+		}
+		if (fl == 0) {
+			sp = sp->next;
+			count++;
+		}
+	}
+}
+
 
 
 
