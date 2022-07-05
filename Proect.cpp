@@ -127,6 +127,52 @@ void search(size_head*& list, int n, int m) {
 		}
 	}
 }
+int main() {
+	setlocale(LC_ALL, "Russian");
+	size_head* list = new size_head;
+	list->size = 0;
+	list->head = NULL;
+	int temp;
+	int n,//число вершин
+		m;//число ребер
+	vector <vector <int>> Matr;//Матрица инцидентности
+	cout << "Введите количество ребер: ";
+	cin >> m;
+	cout << "Введите количество вершин: ";
+	cin >> n;
+	cout << "Введите значения матрицы " << endl;
+	for (int i = 0; i < m; i++) {
+		Matr.push_back(vector<int>());
+		for (int j = 0; j < n; j++) {
+			cin >> temp;
+			if (temp > 2 || temp < 0) return 0;
+			Matr[i].push_back(temp);
+		}
+		cout << endl;
+	}
+	cout << endl;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << Matr[i][j] << " ";
+		}
+		cout << endl;
+	}
+	vector<int> stepen(n);
+	vector<int> ind(n);
+	for (int i = 0; i < n; i++) {
+		ind[i] = i + 1;
+	}
+	for (int i = 0; i < m; i++) {
+		addElem(list, Matr[i], n);
+	}
+	step(list, n, m, stepen);
+	sort(list, n, m, stepen, ind);
+	search(list, n, m);
+	cout << "Список с удаленными элементами" << endl;
+	printlist(list, n);
+	return 0;
+}
+
 
 
 
