@@ -53,5 +53,36 @@ void step(size_head*& list, int n, int m, vector<int>& stepen) {
 	}
 	cout << endl;
 }
+void sort(size_head*& list, int n, int m, vector<int>& stepen, vector<int>& ind) {
+	struct spis* sp = list->head;
+	vector<int> tmp(n);
+	int temp1, temp2;
+	for (int i = 0; i < n - 1; i++) {
+		for (int j = 0; j < m - 1; j++) {
+			if (stepen[j] > stepen[j + 1]) {
+				temp1 = stepen[j];
+				temp2 = ind[j];
+				stepen[j] = stepen[j + 1];
+				ind[j] = ind[j + 1];
+				stepen[j + 1] = temp1;
+				ind[j + 1] = temp2;
+			}
+		}
+	}
+	cout << endl;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			tmp[j] = sp->ver[ind[j] - 1];
+		}
+		sp->ver.swap(tmp);
+		sp = sp->next;
+	}
+	cout << "Индексы" << endl;
+	for (int i = 0; i < n; i++) {
+		cout << ind[i] << " ";
+	}
+	cout << endl;
+}
+
 
 
