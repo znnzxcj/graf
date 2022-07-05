@@ -26,3 +26,14 @@ void addElem(size_head*& list, vector<int> matr, int n) {
 		newElem->next = temp;
 	}
 	++list->size;
+}
+void printlist(size_head*& list, int n) {
+	struct spis* tmp = list->head;
+	cout << "Ёлементы списка: " << endl;
+	for (int i = 0; i < list->size; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << tmp->ver[j] << " ";
+		}
+		tmp = tmp->next;
+		cout << endl;
+	}
